@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(10deg, #ffffff, #f7af66);
+    padding: 10px;
+    display: flex;
+}
+
+.todo-app{
+    width: 100%;
+    max-width: 600px;
+    background: #fcfbf7;
+    margin: 100px auto auto;
+    padding: 40px 30px 60px;
+    border-radius: 10px;
+}
+
+.todo-app .list-title{
+    color: #002765;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    border: none;
+    background-color: #fcfbf7;
+}
+
+.todo-app input:focus{
+    outline: none;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #edeef0;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+.list-input{
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-weight: 14px;
+    background: transparent;
+}
+
+button{
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: #f49957;
+    padding: 16px 50px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+}
+
+.custom-list-element{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    
+}
+
+.custom-list-element li{
+    overflow: hidden;
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    overflow-wrap: break-word;
+    justify-content: space-between;
+}
+
+.custom-list-element li::before{
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-image: url(assets/images/unchecked.png);
+    background-size: cover;
+    background-position: top;
+    top: 30%;
+    left: 8px;
+}
+
+ul li.checked{
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before{
+    background-image: url(assets/images/checked.png)
+}
+
+.custom-list-element span{
+    font-size: 22px;
+    color: #555;
+    display: flex;
+    margin: auto 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-list-element span:hover{
+    cursor: pointer;
+    background: rgb(185, 185, 185);
+}
