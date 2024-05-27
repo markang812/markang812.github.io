@@ -2,6 +2,7 @@ const inputBox = document.getElementById("input-box")
 const listContainer = document.getElementById("list-container")
 const title = document.getElementById("list-title")
 const listElements = document.getElementsByTagName("li")
+const finishedItemsContainer = document.getElementById("finished-items-container")
 
 function addTask(e){
     if(inputBox.value === ""){
@@ -36,6 +37,14 @@ function addTask(e){
 function updateEntryState(e){
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked")
+        
+        let elementToTransfer = e.target.parentElement
+        if(e.target.classList.contains("checked")){
+            finishedItemsContainer.insertBefore(elementToTransfer, finishedItemsContainer.firstChild)
+        }else{
+            listContainer.append(elementToTransfer)
+        }
+
         saveData()
     }else if (e.target.tagName === "SPAN"){
         e.target.parentElement.remove();
@@ -44,6 +53,7 @@ function updateEntryState(e){
 }
 
 listContainer.addEventListener("click", updateEntryState, false)
+finishedItemsContainer.addEventListener("click", updateEntryState, false)
 
 function saveData(){
     localStorage.setItem(
