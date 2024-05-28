@@ -6,15 +6,20 @@
 }
 
 .container{
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     background: linear-gradient(10deg, #ffffff, #f7af66);
     padding: 10px;
     display: flex;
+    justify-content: space-between;
+    overflow-wrap: break-word;
+    overflow-x: auto;
+    gap: 30px;
 }
 
 .todo-app{
     width: 100%;
+    min-width: 600px;
     max-width: 600px;
     background: #fcfbf7;
     margin: 100px auto auto;

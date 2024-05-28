@@ -1,8 +1,11 @@
 const inputBox = document.getElementById("input-box")
 const listContainer = document.getElementById("list-container")
-const title = document.getElementById("list-title")
 const listElements = document.getElementsByTagName("li")
 const finishedItemsContainer = document.getElementById("finished-items-container")
+const mainContainer = document.getElementById("main-container")
+const addNewList = document.getElementById("add-new-list")
+
+console.log(mainContainer.lastElementChild)
 
 function addTask(e){
     if(inputBox.value === ""){
@@ -68,3 +71,40 @@ function loadData(){
 
 loadData()
 
+
+function createTodoContainer(e){
+
+    console.log(e.target.id)
+    // this function creates another todo-app div
+    let todoApp = document.createElement("div")
+    todoApp.setAttribute("class", "todo-app")
+
+    let listTitle = document.createElement("input")
+    listTitle.setAttribute("class", "list-title")
+    listTitle.setAttribute("value", "To Do List")
+
+    let listInputContainer = document.createElement("div")
+    listInputContainer.setAttribute("class", "row")
+
+    // elements to be appended inside listInputContainer
+    let listInput = document.createElement("input")
+    listInput.setAttribute("class", "list-input")
+    listInput.setAttribute("type", "text")
+    listInput.setAttribute("placeholder", "Add your task")
+
+    let addButton = document.createElement("button")
+    addButton.setAttribute("onclick", "addTask()")
+    addButton.innerHTML = "Add"
+
+    listInputContainer.appendChild(listInput)
+    listInputContainer.appendChild(addButton)
+
+    // append new elements to todoApp 
+    todoApp.appendChild(listTitle)
+    todoApp.appendChild(listInputContainer)
+
+    mainContainer.insertBefore(todoApp, mainContainer.lastElementChild)
+
+}
+
+addNewList.addEventListener("click", createTodoContainer, false)
