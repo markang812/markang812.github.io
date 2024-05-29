@@ -12,7 +12,7 @@
             <input class="list-title" value="To Do List">
             <div class="row">
                 <input class="list-input" type="text" id="input-box" placeholder="Add your task">
-                <button onclick="addTask()">Add</button>
+                <button onclick="addTask(event)">Add</button>
             </div>
             <ul id="finished-items-container">
             </ul>
@@ -20,7 +20,12 @@
             </ul>
         </div>
 
-        <div id="add-new-list">add new list</div>
+        <div id="add-new-list">
+            <div id="plus-icon">
+                +
+            </div>
+            Add New List
+        </div>
     </div>
 <script src="script.js"></script>
 </body>

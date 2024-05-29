@@ -5,9 +5,9 @@ const finishedItemsContainer = document.getElementById("finished-items-container
 const mainContainer = document.getElementById("main-container")
 const addNewList = document.getElementById("add-new-list")
 
-console.log(mainContainer.lastElementChild)
-
 function addTask(e){
+
+    console.log(e)
     if(inputBox.value === ""){
         alert("Write a task")
     }else{
