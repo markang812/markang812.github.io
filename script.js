@@ -1,24 +1,24 @@
-const inputBox = document.getElementById("input-box")
-const listContainer = document.getElementById("list-container")
-const listElements = document.getElementsByTagName("li")
-const finishedItemsContainer = document.getElementById("finished-items-container")
 const mainContainer = document.getElementById("main-container")
 const addNewList = document.getElementById("add-new-list")
 
 function addTask(e){
 
-    console.log(e)
-    if(inputBox.value === ""){
+    let relativeTodoAppContainer = e.target.parentElement.parentElement
+    let relativeListContainer = relativeTodoAppContainer.querySelector(".list-container")
+    let relativeInputBox = relativeTodoAppContainer.querySelector(".row").querySelector(".list-input")
+
+    if(relativeInputBox.value === ""){
         alert("Write a task")
     }else{
 
         // create custom list element container
         let customListElement = document.createElement("div")
         customListElement.setAttribute("class", "custom-list-element")
+        customListElement.setAttribute("onclick", "updateEntryState(event)")
 
         // create list element to be appended inside of custom list element
         let listElement = document.createElement("li")
-        listElement.innerHTML = inputBox.value
+        listElement.innerHTML = relativeInputBox.value
 
         // add span tag with X mark
         let span = document.createElement("span")
@@ -29,11 +29,11 @@ function addTask(e){
         customListElement.appendChild(span)
 
         //append newly created custom list element to the list container
-        listContainer.appendChild(customListElement)
+        relativeListContainer.appendChild(customListElement)
     }
 
     // clear the input field
-    inputBox.value = ""
+    relativeInputBox.value = ""
     saveData()
 }
 
@@ -41,6 +41,11 @@ function updateEntryState(e){
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked")
         
+        let relativeTodoAppContainer = e.target.parentElement.parentElement.parentElement
+
+        let finishedItemsContainer = relativeTodoAppContainer.querySelector(".finished-items-container")
+        let listContainer = relativeTodoAppContainer.querySelector(".list-container")
+
         let elementToTransfer = e.target.parentElement
         if(e.target.classList.contains("checked")){
             finishedItemsContainer.insertBefore(elementToTransfer, finishedItemsContainer.firstChild)
@@ -55,26 +60,26 @@ function updateEntryState(e){
     }
 }
 
-listContainer.addEventListener("click", updateEntryState, false)
-finishedItemsContainer.addEventListener("click", updateEntryState, false)
-
 function saveData(){
     localStorage.setItem(
         "data",
-        listContainer.innerHTML
+        mainContainer.innerHTML
     )
 }
 
 function loadData(){
-    listContainer.innerHTML = localStorage.getItem("data")
-}
+    let savedData = localStorage.getItem("data")
 
-loadData()
+    if(savedData != null){
+        mainContainer.innerHTML = savedData
+    }
+    
+    return
+}
 
 
 function createTodoContainer(e){
 
-    console.log(e.target.id)
     // this function creates another todo-app div
     let todoApp = document.createElement("div")
     todoApp.setAttribute("class", "todo-app")
@@ -93,18 +98,30 @@ function createTodoContainer(e){
     listInput.setAttribute("placeholder", "Add your task")
 
     let addButton = document.createElement("button")
-    addButton.setAttribute("onclick", "addTask()")
+    addButton.setAttribute("onclick", "addTask(event)")
     addButton.innerHTML = "Add"
 
     listInputContainer.appendChild(listInput)
     listInputContainer.appendChild(addButton)
 
+    //create finished items container
+    let finishedItemsContainer = document.createElement("ul")
+    finishedItemsContainer.setAttribute("class", "finished-items-container")
+
+    // create list container for unfinished tasks
+    let listContainer = document.createElement("ul")
+    listContainer.setAttribute("class", "list-container")
+
     // append new elements to todoApp 
     todoApp.appendChild(listTitle)
     todoApp.appendChild(listInputContainer)
+    todoApp.appendChild(finishedItemsContainer)
+    todoApp.appendChild(listContainer)
 
     mainContainer.insertBefore(todoApp, mainContainer.lastElementChild)
 
 }
 
 addNewList.addEventListener("click", createTodoContainer, false)
+
+loadData()
