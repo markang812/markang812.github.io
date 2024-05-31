@@ -7,17 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="main-container">
         <div class="todo-app">
-            <input id="list-title" class="list-title" value="To Do List">
+            <input class="list-title" value="To Do List">
             <div class="row">
-                <input class="list-input" type="text" id="input-box" placeholder="Add your task">
-                <button onclick="addTask()">Add</button>
+                <input class="list-input" type="text" placeholder="Add your task">
+                <button onclick="addTask(event)">Add</button>
             </div>
-            <ul id="finished-items-container">
+            <ul class="finished-items-container">
             </ul>
-            <ul id="list-container">
+            <ul class="list-container">
             </ul>
+        </div>
+
+        <div id="add-new-list">
+            <div id="plus-icon">
+                +
+            </div>
+            Add New List
         </div>
     </div>
 <script src="script.js"></script>
