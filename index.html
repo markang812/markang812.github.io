@@ -21,10 +21,16 @@
         </div>
 
         <div id="add-new-list">
-            <div id="plus-icon">
+            <div id="plus-icon" onclick="toggleOptionsVisibility()">
                 +
             </div>
-            Add New List
+            <div id="options">
+                <ul>
+                    <li>Generate EOD Report</li>
+                    <li onclick="createTodoContainer(event)">Add New List</li>
+                </ul>          
+            </div>
+
         </div>
     </div>
 <script src="script.js"></script>

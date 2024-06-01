@@ -1,5 +1,6 @@
 const mainContainer = document.getElementById("main-container")
-const addNewList = document.getElementById("add-new-list")
+const optionsContainer = document.getElementById("options")
+const plusIcon = document.getElementById("plus-icon")
 
 function addTask(e){
 
@@ -122,6 +123,10 @@ function createTodoContainer(e){
 
 }
 
-addNewList.addEventListener("click", createTodoContainer, false)
+function toggleOptionsVisibility(){
+    console.log(optionsContainer)
+    optionsContainer.classList.toggle("invisible")
+    plusIcon.classList.toggle("clicked")
+}
 
-loadData()
+// loadData()

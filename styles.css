@@ -152,9 +152,24 @@ ul li.checked::before{
     color: #7c7b77;
     display: flex;
     flex-direction: column-reverse;
-    align-items: center;
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     padding: 30px;
+}
+
+
+#options li{
+    list-style: none;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #666666;
+}
+
+#options li:hover{
+    background-color: rgb(245, 245, 245);
+}
+
+.invisible{
+    display: none;
 }
