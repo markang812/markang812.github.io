@@ -130,7 +130,7 @@ ul li.checked::before{
     background: rgb(185, 185, 185);
 }
 
-#plus-icon{
+.plus-icon{
     background-color: #f49957;
     height: 60px;
     width: 60px;
@@ -144,7 +144,11 @@ ul li.checked::before{
     margin: 5px;
 }
 
-#plus-icon:hover{
+.plus-icon.clicked{
+    background-color: #f68535;
+}
+
+.plus-icon:hover{
     background-color: #f68535;
 }
 
