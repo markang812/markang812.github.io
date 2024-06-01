@@ -26,11 +26,40 @@
             </div>
             <div id="options" class="invisible">
                 <ul>
-                    <li>Generate EOD Report</li>
+                    <li onclick="openModal()">Generate EOD Report</li>
                     <li onclick="createTodoContainer(event)">Add New List</li>
                 </ul>          
             </div>
 
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal-btn">&times;</span>
+            <table id="generated-table">
+
+            </table>
+            <!-- <table>
+                <tr>
+                  <th colspan="3">EOD REPORT</th>
+                </tr>
+                <tr>
+                    <td rowspan="4">Monday</td>
+                    <td rowspan="2">Envision EV</td>
+                    <td>Bug fix</td>
+                </tr>
+                <tr>
+                    <td>Collect data</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Envision Standard</td>
+                    <td>Refactor</td>
+                  </tr>
+                <tr>
+                    <td>Bug Fixes</td>
+                </tr>
+              </table> -->
         </div>
     </div>
 <script src="script.js"></script>
