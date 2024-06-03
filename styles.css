@@ -35,6 +35,7 @@
     font-weight: bold;
     border: none;
     background-color: #fcfbf7;
+    width: 100%;
 }
 
 .todo-app input:focus{

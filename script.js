@@ -219,21 +219,49 @@ window.onclick = function(event) {
 //     document.getElementById('table-container').appendChild(table);
 // }
 
-function generateTable() {
-    const data = {
-        day: 'Monday',
-        tasks: [
-            {
-                project: 'Envision EV',
-                subtasks: ['Bug fix', 'Collect data']
-            },
-            {
-                project: 'Envision Standard',
-                subtasks: ['Refactor', 'Bug Fixes']
-            }
-        ]
-    };
+function formatDate() {
 
+    let date = Date().date
+    const dayOfWeekFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+    const fullDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    const dayOfWeek = dayOfWeekFormatter.format(date).toUpperCase();
+    const fullDate = fullDateFormatter.format(date);
+
+    return `${dayOfWeek}<br>${fullDate}`;
+}
+
+function collectTodoListData() {
+    const data = {
+        day: formatDate(),
+        tasks: []
+    }
+    const listTitles = document.getElementsByClassName("list-title")
+    for (const element of listTitles){
+
+        let finishedTasks = []
+        let customListElements = element.parentElement
+        .querySelector(".finished-items-container")
+        .querySelectorAll(".custom-list-element")
+
+        for (const customListElement of customListElements){
+            finishedTasks.push(customListElement.querySelector("li").textContent)
+        }
+
+        data.tasks.push(
+            {
+                project: element.value,
+                subtasks: finishedTasks
+            }
+        )
+
+    }   
+    return data
+}
+
+
+function generateTable() {
+    const data = collectTodoListData();
     const table = document.getElementById('generated-table');
     const totalSubtasks = data.tasks.reduce((sum, task) => sum + task.subtasks.length, 0);
 
@@ -255,5 +283,4 @@ function generateTable() {
     });
 
     table.innerHTML = html;
-    console.log(html)
 }
