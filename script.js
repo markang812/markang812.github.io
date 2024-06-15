@@ -136,6 +136,7 @@ const closeModalBtn = document.getElementById("close-modal-btn")
 function openModal(){
     modal.style.display = "block";
     generateTable()
+    generateEmailSubject()
 }
 
 closeModalBtn.onclick = function() {
@@ -282,5 +283,27 @@ function generateTable() {
         });
     });
 
-    table.innerHTML = html;
+    // table.innerHTML = html;
+}
+
+function generateEmailSubject(){
+    let date = Date().date
+    const fullDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const fullDate = fullDateFormatter.format(date);
+
+    const emailSubject = document.getElementById("email-subject")
+    let generatedSubject = `EOD Accomplishment Report | Your Name Here | ${fullDate}`
+    emailSubject.innerHTML = generatedSubject
+}
+
+function copyEmailSubject(){
+    const emailSubjectHeader = document.getElementById("email-subject")
+    navigator.clipboard.writeText(emailSubjectHeader.innerText)
+    return
+}
+
+function copyGeneratedTable(){
+    const generatedTableHTML = document.getElementById("generated-table")
+    navigator.clipboard.write(generatedTableHTML.outerHTML)
+    return
 }

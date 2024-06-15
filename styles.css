@@ -202,6 +202,11 @@ ul li.checked::before{
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    row-gap: 10px;
 }
 
 /* The Close Button */
@@ -210,6 +215,10 @@ ul li.checked::before{
     float: right;
     font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 0;
+
 }
 
 .close:hover,
@@ -219,6 +228,10 @@ ul li.checked::before{
     cursor: pointer;
 }
 
+table{
+    margin: 10px auto;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -226,4 +239,24 @@ table, th, td {
 
 td{
     padding: 10px;
+    max-width: 500px;
+}
+
+h3{
+    font-weight: normal;
+}
+
+.modal-content h2{
+    margin-top: 10px;
+}
+
+img{
+    height: 20px;
+    width: 20px;
+}
+
+img:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 5px;
 }
