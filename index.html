@@ -9,6 +9,7 @@
 <body>
     <div class="container" id="main-container">
         <div class="todo-app">
+            <span onclick="deleteTodoContainer(event)" class="delete-list-btn">x</span>
             <input class="list-title" value="To Do List">
             <div class="row">
                 <input class="list-input" type="text" placeholder="Add your task">
@@ -43,6 +44,7 @@
             </table>
         </div>
     </div>
+    <div id="notification">Copied to clipboard successfully!</div>
 <script src="script.js"></script>
 </body>
 </html>

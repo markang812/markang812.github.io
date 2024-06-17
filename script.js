@@ -84,6 +84,11 @@ function createTodoContainer(e){
     let todoApp = document.createElement("div")
     todoApp.setAttribute("class", "todo-app")
 
+    let deleteAppBtn = document.createElement("span")
+    deleteAppBtn.innerHTML = "x"
+    deleteAppBtn.setAttribute("class", "delete-list-btn")
+    deleteAppBtn.setAttribute("onclick", "deleteTodoContainer(event)")
+
     let listTitle = document.createElement("input")
     listTitle.setAttribute("class", "list-title")
     listTitle.setAttribute("value", "To Do List")
@@ -113,6 +118,7 @@ function createTodoContainer(e){
     listContainer.setAttribute("class", "list-container")
 
     // append new elements to todoApp 
+    todoApp.appendChild(deleteAppBtn)
     todoApp.appendChild(listTitle)
     todoApp.appendChild(listInputContainer)
     todoApp.appendChild(finishedItemsContainer)
@@ -122,12 +128,17 @@ function createTodoContainer(e){
 
 }
 
+function deleteTodoContainer(e){
+    todoListContainer = e.target.parentElement.remove();
+    saveData()
+}
+
 function toggleOptionsVisibility(e){
     optionsContainer.classList.toggle("invisible")
     e.target.classList.toggle("clicked")
 }
 
-// loadData()
+loadData()
 
 // modal scripts
 const modal = document.getElementById("myModal")
@@ -149,76 +160,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
-// // table generation scripts
-// function generateTable() {
-//     // Data to be populated in the table
-//     const data = {
-//         day: 'Monday',
-//         tasks: [
-//             {
-//                 project: 'Envision EV',
-//                 subtasks: ['Bug fix', 'Collect data']
-//             },
-//             {
-//                 project: 'Envision Standard',
-//                 subtasks: ['Refactor', 'Bug Fixes']
-//             }
-//         ]
-//     };
-
-//     // Create table element
-//     const table = document.createElement('table');
-    
-//     // Create the header row
-//     const headerRow = table.insertRow();
-//     const headerCell = document.createElement('th');
-//     headerCell.colSpan = 3;
-//     headerCell.textContent = 'EOD REPORT';
-//     headerRow.appendChild(headerCell);
-
-//     // Create the first row with the day and the first project and its tasks
-//     const firstRow = table.insertRow();
-//     const dayCell = firstRow.insertCell();
-//     dayCell.rowSpan = data.tasks.length;
-//     dayCell.textContent = data.day;
-
-//     const firstTask = data.tasks[0];
-//     const projectCell = firstRow.insertCell();
-//     projectCell.rowSpan = firstTask.subtasks.length;
-//     projectCell.textContent = firstTask.project;
-
-//     const firstSubtaskCell = firstRow.insertCell();
-//     firstSubtaskCell.textContent = firstTask.subtasks[0];
-
-//     // Insert remaining subtasks for the first project
-//     for (let i = 1; i < firstTask.subtasks.length; i++) {
-//         const row = table.insertRow();
-//         const subtaskCell = row.insertCell();
-//         subtaskCell.textContent = firstTask.subtasks[i];
-//     }
-
-//     // Insert rows for the remaining projects and their subtasks
-//     for (let i = 1; i < data.tasks.length; i++) {
-//         const task = data.tasks[i];
-//         const projectRow = table.insertRow();
-//         const projectCell = projectRow.insertCell();
-//         projectCell.rowSpan = task.subtasks.length;
-//         projectCell.textContent = task.project;
-
-//         const subtaskCell = projectRow.insertCell();
-//         subtaskCell.textContent = task.subtasks[0];
-
-//         for (let j = 1; j < task.subtasks.length; j++) {
-//             const row = table.insertRow();
-//             const subtaskCell = row.insertCell();
-//             subtaskCell.textContent = task.subtasks[j];
-//         }
-//     }
-
-//     // Append the table to the container
-//     document.getElementById('table-container').appendChild(table);
-// }
 
 function formatDate() {
 
@@ -300,11 +241,11 @@ function generateEmailSubject(){
 function copyEmailSubject(){
     const emailSubjectHeader = document.getElementById("email-subject")
     navigator.clipboard.writeText(emailSubjectHeader.innerText)
+    showNotification()
     return
 }
 
 function copyGeneratedTable(){
-    console.log("Copy generated table clicked")
     const generatedTableHTML = document.getElementById("generated-table").outerHTML
     navigator.clipboard.write([
         new ClipboardItem({
@@ -312,18 +253,14 @@ function copyGeneratedTable(){
             "text/plain": new Blob([generatedTableHTML], { type: "text/plain" })
         })
     ])
+    showNotification()
     return
 }
 
-// function copyToClipboard(html) {
-//     navigator.clipboard.write([
-//         new ClipboardItem({
-//             "text/html": new Blob([html], { type: "text/html" }),
-//             "text/plain": new Blob([html], { type: "text/plain" })
-//         })
-//     ]).then(() => {
-//         console.log('Copied to clipboard successfully!');
-//     }).catch(err => {
-//         console.error('Could not copy text: ', err);
-//     });
-// }
+function showNotification() {
+    const notification = document.getElementById('notification');
+    notification.className = "show";
+    setTimeout(() => {
+        notification.className = notification.className.replace("show", "");
+    }, 1250);
+}
