@@ -228,20 +228,6 @@ ul li.checked::before{
     cursor: pointer;
 }
 
-table{
-    margin: 10px auto;
-}
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-td{
-    padding: 10px;
-    max-width: 500px;
-}
-
 h3{
     font-weight: normal;
 }

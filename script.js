@@ -248,14 +248,15 @@ function collectTodoListData() {
         for (const customListElement of customListElements){
             finishedTasks.push(customListElement.querySelector("li").textContent)
         }
-
-        data.tasks.push(
-            {
-                project: element.value,
-                subtasks: finishedTasks
-            }
-        )
-
+        
+        if(finishedTasks.length > 0){
+            data.tasks.push(
+                {
+                    project: element.value,
+                    subtasks: finishedTasks
+                }
+            )
+        }
     }   
     return data
 }
@@ -266,24 +267,24 @@ function generateTable() {
     const table = document.getElementById('generated-table');
     const totalSubtasks = data.tasks.reduce((sum, task) => sum + task.subtasks.length, 0);
 
-    let html = '<tr><th colspan="3">EOD REPORT</th></tr>'
+    let html = '<tr><th colspan="3" style="margin: 10px auto; border: 1px solid black; border-collapse: collapse;">EOD REPORT</th></tr>'
     html += '<tr>';
-    html += `<td rowspan="${totalSubtasks}">${data.day}</td>`;
+    html += `<td rowspan="${totalSubtasks}" style="padding: 10px; max-width: 500px; margin: 10px auto; border: 1px solid black; border-collapse: collapse;">${data.day}</td>`;
     
     data.tasks.forEach((task, taskIndex) => {
         if (taskIndex > 0) {
             html += '<tr>';
         }
-        html += `<td rowspan="${task.subtasks.length}">${task.project}</td>`;
+        html += `<td rowspan="${task.subtasks.length}" style="padding: 10px; max-width: 500px; margin: 10px auto; border: 1px solid black; border-collapse: collapse;">${task.project}</td>`;
         task.subtasks.forEach((subtask, subtaskIndex) => {
             if (subtaskIndex > 0) {
                 html += '<tr>';
             }
-            html += `<td>${subtask}</td></tr>`;
+            html += `<td style="padding: 10px; max-width: 500px; margin: 10px auto; border: 1px solid black; border-collapse: collapse;">${subtask}</td></tr>`;
         });
     });
 
-    // table.innerHTML = html;
+    table.innerHTML = html;
 }
 
 function generateEmailSubject(){
@@ -303,7 +304,26 @@ function copyEmailSubject(){
 }
 
 function copyGeneratedTable(){
-    const generatedTableHTML = document.getElementById("generated-table")
-    navigator.clipboard.write(generatedTableHTML.outerHTML)
+    console.log("Copy generated table clicked")
+    const generatedTableHTML = document.getElementById("generated-table").outerHTML
+    navigator.clipboard.write([
+        new ClipboardItem({
+            "text/html": new Blob([generatedTableHTML], { type: "text/html" }),
+            "text/plain": new Blob([generatedTableHTML], { type: "text/plain" })
+        })
+    ])
     return
 }
+
+// function copyToClipboard(html) {
+//     navigator.clipboard.write([
+//         new ClipboardItem({
+//             "text/html": new Blob([html], { type: "text/html" }),
+//             "text/plain": new Blob([html], { type: "text/plain" })
+//         })
+//     ]).then(() => {
+//         console.log('Copied to clipboard successfully!');
+//     }).catch(err => {
+//         console.error('Could not copy text: ', err);
+//     });
+// }
