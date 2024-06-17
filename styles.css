@@ -5,10 +5,22 @@
     box-sizing: border-box
 }
 
+:root{
+    --envision-scheme: #f7af66;
+    --blue: #32426c;
+    --navy-blue: #363e58;
+    --red-orange: #f75d09;
+    --mint-green: #def4e8;
+    --light-blue: #bed0f2;
+    --orange: #f8925b;
+    --main-color: var(--envision-scheme);
+    --secondary-color: white;
+}
+
 .container{
     width: 100vw;
     min-height: 100vh;
-    background: linear-gradient(10deg, #ffffff, #f7af66);
+    background: linear-gradient(10deg, var(--secondary-color), var(--main-color));
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
@@ -67,7 +79,7 @@ button{
     border: none;
     outline: none;
     border-radius: 50%;
-    background-color: #f49957;
+    background-color: var(--main-color);
     padding: 16px 50px;
     border-radius: 40px;
     cursor: pointer;
@@ -134,7 +146,7 @@ ul li.checked::before{
 }
 
 .plus-icon{
-    background-color: #f49957;
+    background-color: var(--main-color);
     height: 60px;
     width: 60px;
     border-radius: 100%;
@@ -148,11 +160,11 @@ ul li.checked::before{
 }
 
 .plus-icon.clicked{
-    background-color: #f68535;
+    background-color: var(--main-color);
 }
 
 .plus-icon:hover{
-    background-color: #f68535;
+    background-color: var(--main-color);
 }
 
 #add-new-list{
