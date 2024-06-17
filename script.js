@@ -1,5 +1,4 @@
 const mainContainer = document.getElementById("main-container")
-const optionsContainer = document.getElementById("options")
 
 function addTask(e){
 
@@ -134,6 +133,7 @@ function deleteTodoContainer(e){
 }
 
 function toggleOptionsVisibility(e){
+    const optionsContainer = document.getElementById("options")
     optionsContainer.classList.toggle("invisible")
     e.target.classList.toggle("clicked")
 }
